@@ -1,0 +1,23 @@
+# files not to save
+.DS_Store
+
+# file folders not to save
+TumorSpheroidABM/data
+VascularABM/data
+VascularABM/Sensitivity/data
+.vscode
+
+# file formats not to save
+**.asv
+**.mat
+**.fig
+**.jpg
+**.svg
+**.mp4
+**.png
+**.eps
+**.pdf
+**.gif
+**.tiff
+**.tif
+**.csv
