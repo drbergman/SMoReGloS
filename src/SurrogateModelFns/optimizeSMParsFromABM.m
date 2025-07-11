@@ -91,9 +91,7 @@ last_save_time = tic;
 
 data_dir = split(opts.checkpoint_filename,"/");
 data_dir = join(data_dir(1:end-1),"/");
-warning("off",'MATLAB:MKDIR:DirectoryExists')
-mkdir(data_dir)
-warning("on",'MATLAB:MKDIR:DirectoryExists')
+[~,~,~] = mkdir(data_dir);
 
 if ~opts.force_serial
     if isempty(gcp('nocreate'))

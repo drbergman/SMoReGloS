@@ -125,7 +125,7 @@ end
 
 last_save_time = tic;
 
-% pL_fn = @(p,d) profileLikelihood(p,t,d,C,sm,profile_params,profile_likelihood_opts,raw_error_opts);
+temp_directory_created = false;
 
 if ~opts.force_serial
     %% run in parallel
@@ -154,6 +154,10 @@ if ~opts.force_serial
             fprintf("Finished %d of %d after %s. ETR: %s. ETT: %s\n",i,num_to_run,duration(0,0,temp),duration(0,0,temp/i * (num_to_run-i)),duration(0,0,temp+temp/i * (num_to_run-i)))
         end
         if mod(i,opts.save_every_iter)==0 && toc(last_save_time) > opts.save_every_sec
+            if ~temp_directory_created
+                [~,~,~] = mkdir(fileparts(opts.temp_profile_name));
+                temp_directory_created = true;
+            end
             save(opts.temp_profile_name,"profiles")
             fprintf("---------------Saved at iteration i = %d---------------\n",i)
             last_save_time = tic;
@@ -171,6 +175,9 @@ else
             fprintf("Finished %d of %d after %s. ETR: %s. ETT: %s\n",i,num_to_run,duration(0,0,temp),duration(0,0,temp/i * (num_to_run-i)),duration(0,0,temp+temp/i * (num_to_run-i)))
         end
         if mod(i,opts.save_every_iter)==0 && toc(last_save_time) > opts.save_every_sec
+            if ~temp_directory_created
+                [~,~,~] = mkdir(fileparts(opts.temp_profile_name));
+            end
             save(opts.temp_profile_name,"profiles")
             fprintf("---------------Saved at iteration i = %d---------------\n",i)
             last_save_time = tic;

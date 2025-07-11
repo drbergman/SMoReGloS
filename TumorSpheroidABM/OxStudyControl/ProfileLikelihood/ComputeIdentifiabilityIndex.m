@@ -1,6 +1,7 @@
 clearvars;
 
-addpath("../../../ProfileLikelihoodFns/")
+addpath("../../../src/myfunctions/")
+addpath("../../../src/ProfileLikelihoodFns/")
 
 
 files.profiles = sprintf("data/Profiles_SMFromABM_clean.mat");
@@ -12,4 +13,4 @@ if exist(file_name,"file") && ~overwrite_save_files
 end
 save(file_name,"files","indices")
 
-rmpath("../../../ProfileLikelihoodFns/")
+rmpath("../../../src/ProfileLikelihoodFns/")

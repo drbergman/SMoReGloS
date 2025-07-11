@@ -3,7 +3,7 @@
 
 # file folders not to save
 TumorSpheroidABM/data
-VascularABM/data
+VascularABM/src/Data
 VascularABM/Sensitivity/data
 .vscode
 

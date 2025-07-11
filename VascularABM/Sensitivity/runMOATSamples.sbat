@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#SBATCH --job-name=SP_Vascular_ABM_MOAT_samples
+#SBATCH --mail-user=<user_email>
+#SBATCH --mail-type=BEGIN,END
+#SBATCH --cpus-per-task=1
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --mem-per-cpu=7000m
+#SBATCH --time=00-05:00:00
+#SBATCH --account=<account_name>
+#SBATCH --array=1-450
+#SBATCH --partition=standard
+#SBATCH --output=/home/%u/VascularABM/logs/%x-%j.log
+
+module load matlab
+matlab -nodisplay -r "mainGS_MOAT($SLURM_ARRAY_TASK_ID); exit;"

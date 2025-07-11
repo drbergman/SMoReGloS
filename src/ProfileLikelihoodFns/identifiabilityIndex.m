@@ -11,13 +11,6 @@ for i = 1:n_sm_pars
         profile = profiles{i,j};
         min_val = min(profile(end,:));
         indices(i,j) = sum(profile(end,[1,end]) >= min_val + threshold);
-        % figureOnRight
-        % for k = 1:4
-        %     nexttile
-        %     plot(profile(i,:), profile(k,:))
-        % end
-        % yline(min_val + threshold)
-        % title(indices(i,j))
     end
 end
 

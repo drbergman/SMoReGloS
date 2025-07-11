@@ -46,8 +46,7 @@
 
 
 clearvars;
-cohort_name = "cohort_2507081432";
-% addpath("~/Documents/MATLAB/myfunctions/") % replace with path (rel or abs) to myfunctions
+cohort_name = "cohort_2507082020";
 load(sprintf("../../data/%s/output.mat",cohort_name),"ids","nsamps_per_condition","cohort_size","lattice_parameters");
 nsamps_per_parameter_vector = nsamps_per_condition;
 n_conditions = 1;
@@ -94,16 +93,15 @@ temp_avg = reshape(temp_avg,nt,2,[]);
 temp_std = reshape(temp_std,nt,2,[]);
 
 %% create data struct and replace 0 SD with nonzero SD
-% if isempty(gcp('nocreate'))
-%     parpool("Threads")
-% end
+if isempty(gcp('nocreate'))
+    parpool("Threads")
+end
 r_threshold = 1e-14;
 for i = size(temp_avg,3):-1:1
     D(i).A = temp_avg(:,:,i);
     covs = zeros(2,2,nt);
     r = zeros(nt,1);
-    % parfor ti = 1:nt
-    for ti = 1:nt
+    parfor ti = 1:nt
         covs(:,:,ti) = cov(squeeze(state_vars(ti,:,i,:))');
         r(ti) = rcond(squeeze(covs(:,:,ti)));
     end
@@ -158,8 +156,7 @@ for i = size(temp_avg,3):-1:1
 
     dets = zeros(nt,1);
     invs = zeros(2,2,nt);
-    % parfor ti = 1:nt
-    for ti = 1:nt
+    parfor ti = 1:nt
         dets(ti) = det(covs(:,:,ti));
         invs(:,:,ti) = inv(covs(:,:,ti));
     end

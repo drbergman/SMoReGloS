@@ -1,20 +1,24 @@
 clearvars;
 
-addpath("../../../ProfileLikelihoodFns/")
+addpath("../../../src/ProfileLikelihoodFns/")
 
 overwrite_profile = false;
-files.profiles = "data/Profiles_SMFromABM_clean";
+profile_to_clean = "data/Profiles_SMFromABM";
 
 boundary_tolerance = 0.01;
 %% load and clean profiles
+files.profiles = profile_to_clean;
 
-profiles = cleanProfiles(files,boundary_tolerance=boundary_tolerance);
+profiles = cleanProfiles(files);
 
 if overwrite_profile
-    save(profile_to_clean,"profiles") %#ok<*UNRCH>
+    file_to_save = profile_to_clean; %#ok<*UNRCH>
 else
-    save(profile_to_clean + "_clean","profiles")
+    file_to_save = profile_to_clean + "_clean.mat";
+    copyfile(profile_to_clean + ".mat", file_to_save)
 end
 
+save(file_to_save, "profiles", "-append")
+
 %% reset path
-rmpath("../../../ProfileLikelihoodFns/")
+rmpath("../../../src/ProfileLikelihoodFns/")

@@ -9,7 +9,7 @@ addpath("../src/myfunctions/") % replace with path (rel or abs) to myfunctions
 
 %% cohort structure
 cohort_pars.nsamps_per_condition = 6;
-cohort_pars.min_parfor_num = Inf;
+cohort_pars.min_parfor_num = 4;
 cohort_pars.linkingFunction = @linkByName; % a function to link any parameters across the cohort (e.g. arrest coefficients or dosing parameters)
 
 % parameters to link; each cell containts a string array of parameter values to link (if they are being varied); they must be varied over the same number of parameters

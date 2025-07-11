@@ -6,10 +6,10 @@
 % of all ODE model parameters at a given ABM parameter vector.
 
 clearvars;
-addpath("../../../SurrogateModelFns/")
-addpath("../../../ProfileLikelihoodFns/")
+addpath("../../../src/SurrogateModelFns/")
+addpath("../../../src/ProfileLikelihoodFns/")
 addpath("../ODEFitting/")
-addpath("~/Documents/MATLAB/myfunctions/") % replace with path (rel or abs) to myfunctions
+addpath("../../../src/myfunctions/") % replace with path (rel or abs) to myfunctions
 
 %% clear persistent variables
 clear rawError solveSM customRawError
@@ -21,14 +21,14 @@ files.optimal_parameters = "../ODEFitting/data/SMFitToABM.mat";
 load(files.optimal_parameters,"cohort_name")
 
 files.data = sprintf("../../data/%s/summary.mat",cohort_name);
-% files.previous_profile_file = "data/Profiles_SMFromABM_clean.mat";
+% files.previous_profile_file = "data/temp_profile_01.mat";
 
 save_all_pars = true;
-force_serial = true;
+force_serial = false;
 save_every_iter = 50; % wait at least this many iterations between saves
 save_every_sec = 5*60; % wait at least this many seconds between saves
 
-load("../ODEFitting/data/SMFitToData_New.mat","sm","lb","ub","optim_opts")
+load(files.optimal_parameters,"sm","lb","ub","optim_opts")
 optim_opts.Display = "off";
 [p,~,~] = basePars();
 
@@ -69,7 +69,7 @@ save("data/" + file_name,"profiles","files","profile_params")
 
 %% reset path
 rmpath("../ODEFitting/")
-rmpath("../../../SurrogateModelFns/")
-rmpath("../../../ProfileLikelihoodFns/")
+rmpath("../../../src/SurrogateModelFns/")
+rmpath("../../../src/ProfileLikelihoodFns/")
 
 

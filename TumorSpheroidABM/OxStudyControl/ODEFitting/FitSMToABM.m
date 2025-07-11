@@ -2,20 +2,20 @@
 % vector. 
 clear all
 clearvars;
-% addpath("~/Documents/MATLAB/myfunctions/") % replace with path (rel or abs) to myfunctions
+addpath("../../../src/myfunctions/") % replace with path (rel or abs) to myfunctions
 addpath("../../../src/SurrogateModelFns/")
 
 %% reset persistent variables first
 clear rawError solveSM customRawError
 
 %% continue...
-make_save = false;
+make_save = true;
 
-force_serial = true;
+force_serial = false;
 n_starts = 1;
 assume_independent_time_series = true;
 
-cohort_name = "cohort_2507081432";
+cohort_name = "cohort_2507082020";
 
 
 [p,lb,ub] = basePars();
@@ -43,8 +43,8 @@ P = optimizeSMParsFromABM(files,sm,p,lb,ub,optim_opts,weights,...
     force_serial=force_serial,n_starts=n_starts,assume_independent_time_series=assume_independent_time_series);
 
 if make_save
-    save("data/SMFitToABM.mat","P","cohort_name","sm")
+    save("data/SMFitToABM.mat","P","cohort_name","sm", "lb", "ub", "optim_opts")
 end
 
 %% reset path
-rmpath("../../../SurrogateModelFns/")
+rmpath("../../../src/SurrogateModelFns/")
