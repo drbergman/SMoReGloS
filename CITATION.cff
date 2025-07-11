@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Bergman
+    given-names: Daniel
+  - family-names: Jackson
+    given-names: Trachette
+  - family-names: Jain
+    given-names: Harsh Vardhan
+  - family-names: Norton
+    given-names: Kerri-Ann
+title: "SMoRe GloS: An efficient and flexible framework for inferring global sensitivity of agent-based model parameters"
+version: 1.0.0
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.15859052
+date-released: 2025-07-10
